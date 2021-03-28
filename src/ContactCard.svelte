@@ -3,6 +3,8 @@
   export let job;
   export let desc;
   export let imgUrl;
+
+  const initialName = name;
 </script>
 
 <style>
@@ -60,7 +62,7 @@
         <img src={imgUrl} alt="avatar">
       </figure>
       <div class="cc-details">
-        <h4>{name}</h4>
+      <h4>{name} / {initialName}</h4>
         <p>{job}</p>
       </div>
     </div>

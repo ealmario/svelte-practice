@@ -22,9 +22,17 @@
 		}
 		createdContacts = [
 			...createdContacts, 
-			{ name, job, desc, imgUrl }
+			{ id: Math.random(), name, job, desc, imgUrl }
 		];
 		formState = 'done';
+	}
+
+	function deleteFirst() {
+		createdContacts = createdContacts.slice(1);
+	}
+
+	function deleteLast() {
+		createdContacts = createdContacts.slice(0, -1);
 	}
 </script>
 
@@ -54,6 +62,8 @@
 	<textarea bind:value={desc} id="desc"/>
 
 	<button on:click={addCard}>Add Card</button>
+	<button on:click={deleteFirst}>Delete First Item</button>
+	<button on:click={deleteLast}>Delete Last Item</button>
 </div>
 
 {#if formState === 'invalid'}
@@ -62,7 +72,7 @@
 	<MsgCard msg="Please fill out the whole form" />
 {/if}
 
-{#each createdContacts as createdContact, index}
+{#each createdContacts as createdContact, index (createdContact.id)}
 	<h2>{index}</h2>
 	<ContactCard 
 		name={createdContact.name}
