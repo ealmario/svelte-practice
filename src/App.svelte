@@ -1,11 +1,14 @@
 <script>
 	import ContactCard from './ContactCard.svelte';
+	import MsgCard from './MsgCard.svelte';
 
 	let name = '';
 	let job = '';
 	let desc = '';
 	let imgUrl = '';
 	let formState = 'empty';
+
+	let createdContacts = [];
 
 	function addCard() {
 		if (
@@ -17,24 +20,15 @@
 			formState = 'invalid';
 			return;
 		}
+		createdContacts = [
+			...createdContacts, 
+			{ name, job, desc, imgUrl }
+		];
 		formState = 'done';
 	}
 </script>
 
 <style>
-
-	.msg-card {
-		border-radius: 4px;
-		box-shadow: 0px 8px 24px rgba(0,0,0,0.15);
-		margin: 0 auto;
-		padding: 1rem;
-		width: 150px;
-	}
-
-	.msg-card p {
-		text-align: center;
-	}
-
 	.form {
 		display: flex;
 		flex-direction: column;
@@ -63,18 +57,19 @@
 </div>
 
 {#if formState === 'invalid'}
-	<div class="msg-card">
-		<p>Input is invalid.</p>
-	</div>
-{:else if formState === 'done'}
-<ContactCard
-	{imgUrl}
-	{name}
-	{job}
-	{desc}
-/>
+	<MsgCard msg="Input is invalid" />
 {:else}
-	<div class="msg-card">
-		<p>Please fill out the whole form.</p>
-	</div>
+	<MsgCard msg="Please fill out the whole form" />
 {/if}
+
+{#each createdContacts as createdContact, index}
+	<h2>{index}</h2>
+	<ContactCard 
+		name={createdContact.name}
+		job={createdContact.job}
+		imgUrl={createdContact.imgUrl}
+		desc={createdContact.desc}
+	/>
+{:else}
+	<MsgCard msg="Please start adding contacts. We found none!" />
+{/each}

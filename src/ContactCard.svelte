@@ -17,7 +17,6 @@
     margin: 0 auto;
     padding: 1rem 2rem;
     width: 300px;
-    height: 400px;
   }
 
   .cc-header {
