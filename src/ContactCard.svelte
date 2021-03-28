@@ -20,9 +20,28 @@
     height: 400px;
   }
 
-  .cc-header img {
+  .cc-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  img {
     width: 100%;
+    height: 100%;
+  }
+
+  .thumb {
     height: auto;
+    width: 100%;
+    margin: 0;
+  }
+
+  .thumb-placeholder {
+    background-color: gray;
+    width: 300px;
+    height: 150px;
+    margin: 0;
   }
 
   .divider {
@@ -37,7 +56,10 @@
 <div class="container">
   <div class="contact-card">
     <div class="cc-header">
-      <img src={imgUrl} alt="avatar">
+      <!-- <figure class="thumb" class:thumb-placeholder={!imgUrl}> to add a class conditionally using svelte syntax-->
+      <figure class={imgUrl ? 'thumb' : 'thumb-placeholder'}>
+        <img src={imgUrl} alt="avatar">
+      </figure>
       <div class="cc-details">
         <h4>{name}</h4>
         <p>{job}</p>
