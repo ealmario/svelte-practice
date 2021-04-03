@@ -1,4 +1,34 @@
 <script>
+  let passwords = [];
+  let password = '';
+  let errorMsg = '';
+  
+
+  function createPassword() {
+    console.log("Clicked!")
+    if (password.trim().length <= 5) {
+      return errorMsg = 'Password is too short.'
+    } else if (password.trim().length >= 10) {
+      return errorMsg = 'Password is too long.'
+    }
+
+    passwords = [...passwords, {id: Math.random(), password}];
+    console.log(passwords);
+  }
+</script>
+
+<label for="password">Enter password:</label>
+<input type="password" bind:value={password} id="password"/>
+<button on:click={createPassword}>Add Password</button>
+{#if errorMsg !== ''}
+  <p>{errorMsg}</p>
+{/if}
+
+{#each passwords as password}
+  <p>{password.password}</p>
+{/each}
+
+<!-- <script>
 	import ContactCard from './ContactCard.svelte';
 	import MsgCard from './MsgCard.svelte';
 
@@ -82,4 +112,4 @@
 	/>
 {:else}
 	<MsgCard msg="Please start adding contacts. We found none!" />
-{/each}
+{/each} -->
