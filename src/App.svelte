@@ -11,6 +11,7 @@
 	let createdContacts = [];
 
 	function addCard() {
+		// You can add the event object here and use event.preventDefault
 		if (
 			name.trim().length === 0 ||
 			job.trim().length === 0 || 
@@ -51,7 +52,7 @@
 	}
 </style>
 
-<div class="form">
+<form class="form">
 	<label for="imgUrl">Image URL:</label>
 	<input type="text" bind:value={imgUrl} id="imgUrl"/>
 	<label for="name">Name:</label>
@@ -61,10 +62,11 @@
 	<label for="desc">Short Description:</label>
 	<textarea bind:value={desc} id="desc"/>
 
-	<button on:click={addCard}>Add Card</button>
-	<button on:click={deleteFirst}>Delete First Item</button>
-	<button on:click={deleteLast}>Delete Last Item</button>
-</div>
+	<button on:click|preventDefault={addCard} type="submit">Add Card</button>
+</form>
+
+<button on:click={deleteFirst}>Delete First Item</button>
+<button on:click={deleteLast}>Delete Last Item</button>
 
 {#if formState === 'invalid'}
 	<MsgCard msg="Input is invalid" />
